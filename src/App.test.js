@@ -16,10 +16,12 @@ test("renders learn react link", async () => {
   expect(element).toBeInTheDocument();
 });
 
-test("handles errors", async () => {
+test("handles currency error", async () => {
+  const error = 'Moeda não encontrada';
+
   server.use(
     rest.get("https://api.exchangeratesapi.io/latest", (_req, res, ctx) => {
-      return res(ctx.status(404));
+      return res(ctx.status(404), ctx.json({ error }));
     })
   );
 
@@ -28,6 +30,24 @@ test("handles errors", async () => {
       <App />
     </SWRConfig>
   );
-  const element = await findByText(/Error/i);
+  const element = await findByText(error);
+  expect(element).toBeInTheDocument();
+});
+
+test("handles currency error", async () => {
+  const message = 'Usuário não encontrado';
+
+  server.use(
+    rest.get("https://api.github.com/users/brunoBrian", (_req, res, ctx) => {
+      return res(ctx.status(404), ctx.json({ message }));
+    })
+  );
+
+  const { findByText } = render(
+    <SWRConfig value={{ dedupingInterval: 0 }}>
+      <App />
+    </SWRConfig>
+  );
+  const element = await findByText(message);
   expect(element).toBeInTheDocument();
 });

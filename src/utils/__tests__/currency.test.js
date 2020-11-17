@@ -1,5 +1,5 @@
-import { convert } from "./currency";
-import { server, rest } from "../testServer";
+import { convert } from "../currency";
+import { server, rest } from "../../testServer";
 
 it("converts correctly", async () => {
   const rate = await convert("USD", "CAD");

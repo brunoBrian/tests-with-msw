@@ -18,4 +18,4 @@ async function convertAxios(base, destination) {
   return result.data.rates[destination];
 }
 
-export { convertFetch as convert };
+export { convertAxios as convert };
