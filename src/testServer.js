@@ -1,16 +1,14 @@
 import "whatwg-fetch";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import { successFetchData } from "./utils/__mocks__/user";
+import { mockSuccessFetch } from "./utils/__mocks__/user";
 import { successFetchRepoData } from "./utils/__mocks__/repos";
 
 const server = setupServer(
   rest.get("https://api.exchangeratesapi.io/latest", (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ rates: { CAD: 1.42 } }));
   }),
-  rest.get("https://api.github.com/users/brunoBrian", (_req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(successFetchData));
-  }),
+  rest.get("https://api.github.com/users/:user", mockSuccessFetch),
   rest.get("https://api.github.com/users/octocat/repos", (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json(successFetchRepoData));
   }),
