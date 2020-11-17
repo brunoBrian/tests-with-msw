@@ -34,7 +34,7 @@
     ]
   },
   "devDependencies": {
-    "msw": "^0.18.0",
+    "msw": "^0.21.3",
     "whatwg-fetch": "^3.0.0"
   }
 }
