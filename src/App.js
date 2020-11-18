@@ -1,7 +1,7 @@
 import React from "react";
 import useSWR from "swr";
-import { convert } from "./utils/currency";
-import { fetchUser } from "./utils/user";
+import { convert } from "./services/currency";
+import { fetchUser } from "./services/user";
 
 export default function App() {
   const [base, dest] = ["USD", "CAD"];

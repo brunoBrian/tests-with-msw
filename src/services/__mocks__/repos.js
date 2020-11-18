@@ -16,3 +16,10 @@ export const successFetchRepoData = {
     }
   ]
 };
+
+export const mockRepoSuccess = (req, res, ctx) => {
+  return res(
+    ctx.status(200),
+    ctx.json(successFetchRepoData),
+  )
+}
